@@ -1,22 +1,21 @@
-import { useState, useEffect } from 'react';
-import agent from '../../app/api/agent';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import LoadingComponent from '../../app/layout/LoadingComponent';
-import Product from '../../app/models/product';
+import { AppDispatch, useAppSelector } from '../../app/store/configureStore';
+import { fetchProductsAsync, productSelectors } from './catalogSlice';
 import { ProductList } from './ProductList';
 
 export default function Catalog() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const products = useAppSelector(productSelectors.selectAll);
+  const { productsLoaded, status } = useAppSelector((state) => state.catalog);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    agent.Catalog.list()
-      .then((products) => setProducts(products))
-      .finally(() => setLoading(false));
-  }, []);
+    if (!productsLoaded) dispatch(fetchProductsAsync());
+  }, [productsLoaded, dispatch]);
 
-  return loading ? (
-    <LoadingComponent message="Loading products..." />
-  ) : (
-    <ProductList products={products} />
-  );
+  if (status.includes('pending'))
+    return <LoadingComponent message="Loading products..." />;
+
+  return <ProductList products={products} />;
 }
