@@ -13,16 +13,19 @@ import {
   Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppDispatch, useAppSelector } from '../../app/store/configureStore';
+import {
+  AppDispatch,
+  useAppDispatch,
+  useAppSelector
+} from '../../app/store/configureStore';
 import { currencyFormat } from '../../app/utils/utils';
 import { addBasketItemAsync, removeBasketItemAsync } from './basketSlice';
 import BasketSummary from './BasketSummary';
 
 export default function BasketPage() {
   const { basket, status } = useAppSelector((state) => state.basket);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   if (!basket) return <Typography variant="h3">Empty basket</Typography>;
   return (

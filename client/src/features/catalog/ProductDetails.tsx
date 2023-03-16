@@ -13,11 +13,10 @@ import {
   Typography
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import NotFound from '../../app/errors/NotFound';
 import LoadingComponent from '../../app/layout/LoadingComponent';
-import { AppDispatch, useAppSelector } from '../../app/store/configureStore';
+import { useAppDispatch, useAppSelector } from '../../app/store/configureStore';
 import { currencyFormat } from '../../app/utils/utils';
 import {
   addBasketItemAsync,
@@ -28,7 +27,7 @@ import { fetchProductAsync, productSelectors } from './catalogSlice';
 export default function ProductDetails() {
   const { basket, status } = useAppSelector((state) => state.basket);
   const { status: productStatus } = useAppSelector((state) => state.catalog);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const product = useAppSelector((state) =>
     productSelectors.selectById(state, id!)
