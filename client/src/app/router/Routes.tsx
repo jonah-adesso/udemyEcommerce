@@ -8,7 +8,6 @@ import ProductDetails from '../../features/catalog/ProductDetails';
 
 import CheckoutWrapper from '../../features/checkout/CheckoutWrapper';
 import ContactPage from '../../features/contact/ContactPage';
-import HomePage from '../../features/home/HomePage';
 import Orders from '../../features/orders/Orders';
 import NotFound from '../errors/NotFound';
 import ServerError from '../errors/ServerError';
