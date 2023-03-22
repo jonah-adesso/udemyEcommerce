@@ -9,7 +9,7 @@ namespace api.Entities.OrderAggregate
 
         [Required]
         public ShippingAddress ShippingAddress { get; set; }
-        public DateTime OrderDate { get; set; } = DateTime.UtcNow;
+        public DateTime OrderDate { get; set; } = DateTime.UtcNow; // Postgres sql needs utcnow
         public List<OrderItem> OrderItems { get; set; }
         public long Subtotal { get; set; }
         public long DeliveryFee { get; set; }
