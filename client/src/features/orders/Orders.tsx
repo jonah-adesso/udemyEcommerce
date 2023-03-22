@@ -13,7 +13,7 @@ import {
   IconButton,
   Collapse
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import agent from '../../app/api/agent';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { Order } from '../../app/models/order';
@@ -49,9 +49,8 @@ export default function OrdersView() {
         </TableHead>
         <TableBody>
           {orders?.map((order) => (
-            <>
+            <Fragment key={order.id}>
               <TableRow
-                key={order.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell>
@@ -86,11 +85,14 @@ export default function OrdersView() {
                   colSpan={6}
                 >
                   <Collapse in={open === order.id} timeout="auto" unmountOnExit>
-                    <OrderDetailed order={order} />
+                    <OrderDetailed
+                      order={order}
+                      key={order.id + order.orderDate}
+                    />
                   </Collapse>
                 </TableCell>
               </TableRow>
-            </>
+            </Fragment>
           ))}
         </TableBody>
       </Table>
