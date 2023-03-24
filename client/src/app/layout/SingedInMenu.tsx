@@ -36,7 +36,6 @@ export default function SignedInMenu() {
         <MenuItem component={Link} to="/orders">
           My orders
         </MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem
           onClick={() => {
             dispatch(signOut());
