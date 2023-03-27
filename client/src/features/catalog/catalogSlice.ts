@@ -114,6 +114,14 @@ export const catalogSlice = createSlice({
     setPageNumber: (state, action) => {
       state.productsLoaded = false;
       state.productParams = { ...state.productParams, ...action.payload };
+    },
+    setProduct: (state, action) => {
+      productsAdapter.upsertOne(state, action.payload); // Not really needed since state is refreshed in next row
+      state.productsLoaded = false;
+    },
+    removeProduct: (state, action) => {
+      productsAdapter.removeOne(state, action.payload); // Not really needed since state is refreshed in next row
+      state.productsLoaded = false;
     }
   },
   extraReducers: (builder) => {
@@ -168,5 +176,7 @@ export const {
   setProductParams,
   resetProductParams,
   setMetaData,
-  setPageNumber
+  setPageNumber,
+  setProduct,
+  removeProduct
 } = catalogSlice.actions;
