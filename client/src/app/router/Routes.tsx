@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AboutPage from '../../features/about/AboutPage';
 import Login from '../../features/account/Login';
 import Register from '../../features/account/Register';
+import Admin from '../../features/admin/Admin';
 import Inventory from '../../features/admin/Inventory';
 import BasketPage from '../../features/basket/BasketPage';
 import Catalog from '../../features/catalog/Catalog';
@@ -31,7 +32,10 @@ export const router = createBrowserRouter([
       {
         // admin routes
         element: <RequireAuth roles={['Admin']} />,
-        children: [{ path: 'inventory', element: <Inventory /> }]
+        children: [
+          { path: 'admin', element: <Admin /> },
+          { path: 'inventory', element: <Inventory /> }
+        ]
       },
 
       { path: 'catalog', element: <Catalog /> },

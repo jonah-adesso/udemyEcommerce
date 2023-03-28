@@ -94,7 +94,9 @@ const Admin = {
     requests.post('products', createFormData(product)),
   updateProduct: (product: any) =>
     requests.put('products', createFormData(product)),
-  deleteProduct: (id: number) => requests.delete(`products/${id}`)
+  deleteProduct: (id: number) => requests.delete(`products/${id}`),
+  createCategory: (category: any) =>
+    requests.post('categories', createFormData(category))
 };
 const Catalog = {
   list: (params: URLSearchParams) => requests.get('products', params),
